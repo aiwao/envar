@@ -36,6 +36,9 @@ func setEnv(t *testing.T) {
 
 	//json
 	t.Setenv("ENVAR_JSON", `{"env": "envar json"}`)
+
+	//url
+	t.Setenv("ENVAR_URL", "https://140.lol")
 }
 
 func TestInt(t *testing.T) {
@@ -76,4 +79,13 @@ func TestUnmarshal(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf("Unmarshal: %s", jsonValue.Env)
+}
+
+func TestURL(t *testing.T) {
+	setEnv(t)
+	parsed, err := GetURL("ENVAR_URL")
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("URL: %s", parsed.String())
 }

@@ -2,6 +2,7 @@ package envar
 
 import (
 	"encoding/json"
+	"net/url"
 	"os"
 	"strconv"
 )
@@ -263,4 +264,9 @@ func Unmarshal(key string, value any) error {
 		return err
 	}
 	return nil
+}
+
+// GetURL parse env to url and return result
+func GetURL(key string) (*url.URL, error) {
+	return url.Parse(os.Getenv(key))
 }
